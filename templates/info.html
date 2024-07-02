@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Box</title>
+    <link rel="stylesheet" type="text/css" href="../static/style2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#home" class="logo">
+            Asset <span>Search</span>
+        </a>
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html">Inicio</a>
+            <a href="info.html" class="active">Busqueda</a>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <div class="box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+            <input type="text" id="domainInput" placeholder="Buscar...">
+        </div>
+        <div class="button-container">
+            <button id="searchButton">Buscar</button>
+        </div>
+    </div>
+
+    <div id="message"></div>
+    <div id="table-container"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#searchButton').click(function() {
+                var domain = $('#domainInput').val();
+                if (domain) {
+                    $.ajax({
+                        url: '/search',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ domain: domain }),
+                        success: function(response) {
+                            $('#message').html('<p>Búsqueda completada. <a href="/download">Descargar archivo Excel</a></p>');
+                            var table = '<table><thead><tr><th>ID activo</th><th>Tipo de activo</th><th>Nombre del activo</th><th>Descripción</th></tr></thead><tbody>';
+                            response.data.forEach(function(item) {
+                                table += '<tr><td>' + item["ID activo"] + '</td><td>' + item["Tipo de activo"] + '</td><td>' + item["Nombre del activo"] + '</td><td>' + item["Descripción"] + '</td></tr>';
+                            });
+                            table += '</tbody></table>';
+                            $('#table-container').html(table);
+                        },
+                        error: function() {
+                            $('#message').html('<p>Ocurrió un error durante la búsqueda.</p>');
+                        }
+                    });
+                } else {
+                    $('#message').html('<p>Por favor, ingresa un dominio.</p>');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
