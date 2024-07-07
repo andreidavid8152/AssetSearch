@@ -323,3 +323,50 @@ span {
 
 
 }
+
+
+.box{
+  width: 500px;
+  height: 50px;
+  background-color: var(--text-color);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.box > input{
+  background-color: var(--text-color);
+  flex: 1;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding-left: 10px;
+
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  background-color: var(--main-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: background-color 0.3s ease;
+}
+
+button > a{
+  color:  white;
+}
+
+button:hover {
+  background-color: darkred;
+}

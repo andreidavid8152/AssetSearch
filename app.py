@@ -38,15 +38,20 @@ def classify_subdomains(subdomains):
     for i, subdomain in enumerate(subdomains):
         asset_type = classify_subdomain(subdomain)
         data.append({
-            "ID activo": i + 1,
+            "ID activo": str(i + 1),  # Asegurarse de que sea string
             "Tipo de activo": asset_type,
             "Nombre del activo": subdomain,
-            "Descripción": "Subdominio detectado por Assetfinder clasificado como " + asset_type
+            "Descripción": f"Subdominio detectado por Assetfinder clasificado como {asset_type}"
         })
+    print(data)  # Imprimir los datos para depuración
     return data
+
 
 def save_to_excel(data):
     df = pd.DataFrame(data)
+    # Convertir nuevamente los nombres de columnas a strings
+    df.columns = [str(column) for column in df.columns]
+    print(df.head())  # Imprimir las primeras filas para depuración
     file_path = "activos_digitales.xlsx"
     with pd.ExcelWriter(file_path, engine="openpyxl") as writer:
         df.to_excel(writer, index=False, sheet_name="Activos Digitales")
@@ -62,9 +67,13 @@ def save_to_excel(data):
         worksheet.add_table(table)
     return file_path
 
-@app.route('/search', methods=['POST'])
+
+
+@app.route('/search', methods=['GET'])
 def search():
-    domain = request.json.get('domain')
+    domain = request.args.get('domain')
+    if not domain:
+        return jsonify({"message": "No domain provided"}), 400
     subdomains = get_subdomains(domain)
     data = classify_subdomains(subdomains)
     file_path = save_to_excel(data)
