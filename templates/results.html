@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de la Búsqueda</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a202c; /* Fondo oscuro */
+            color: #f7fafc; /* Texto claro */
+        }
+    </style>
 </head>
-<body>
-    <section id="results" class="results-container">
-    </section>
+<body class="bg-gray-900 text-gray-100">
+    <header class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold">Resultados de la Búsqueda</h1>
+        </div>
+    </header>
+    <main class="container mx-auto py-6">
+        <section id="results" class="results-container">
+        </section>
+    </main>
     <script src="../static/script.js" defer></script>
 </body>
 </html>

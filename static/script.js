@@ -49,21 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Procesa las categorías de función
     displayCategory(
       "Categorías de Función",
       data.function_categories,
       resultsContainer
     );
-
-    // Procesa las categorías de tipo de datos
     displayCategory(
       "Categorías de Tipo de Datos",
       data.data_type_categories,
       resultsContainer
     );
-
-    // Procesa las categorías de sensibilidad
     displayCategory(
       "Categorías de Sensibilidad",
       data.sensitivity_categories,
@@ -75,18 +70,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (Object.keys(categoryData).length > 0) {
       const categoryTitle = document.createElement("h2");
       categoryTitle.textContent = title;
+      categoryTitle.classList.add("text-2xl", "font-bold", "my-4");
       container.appendChild(categoryTitle);
 
       Object.entries(categoryData).forEach(([category, items]) => {
         const categoryContainer = document.createElement("div");
-        categoryContainer.classList.add("category-container");
+        categoryContainer.classList.add("category-container", "mb-6");
 
         const categoryTitle = document.createElement("h3");
         categoryTitle.textContent = category;
+        categoryTitle.classList.add("text-xl", "font-semibold", "mb-2");
         categoryContainer.appendChild(categoryTitle);
 
         items.forEach((item) => {
           const itemElement = createItemElement(item, category);
+          itemElement.classList.add(
+            "p-4",
+            "bg-gray-800",
+            "rounded-lg",
+            "shadow-md",
+            "mb-4"
+          );
           categoryContainer.appendChild(itemElement);
         });
 
@@ -97,28 +101,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createItemElement(item, category) {
     const itemElement = document.createElement("div");
-    itemElement.classList.add("result-item");
 
-    if (category === "application_servers" || category === "mail_servers") {
-      const title = item.title || "Sin título";
-      const link = item.link || "#";
+    if (item.title && item.link) {
       itemElement.innerHTML = `
-                <h4>${title}</h4>
-                <a href="${link}" target="_blank">${link}</a>
-            `;
-    } else if (category === "dns_info") {
+        <h4 class="text-lg font-semibold">${item.title}</h4>
+        <a href="${item.link}" target="_blank" class="text-blue-400">${item.link}</a>
+      `;
+    } else if (item.dns_info) {
       itemElement.innerHTML = `
-                <h4>DNS Info</h4>
-                <p>${item.dns_info.join(", ")}</p>
-            `;
-    } else if (category === "whois_info") {
-      const domainName = item.domainName || "Desconocido";
+        <h4 class="text-lg font-semibold">DNS Info</h4>
+        <p>${item.dns_info.join(", ")}</p>
+      `;
+    } else if (item.domainName) {
       itemElement.innerHTML = `
-                <h4>Whois Info</h4>
-                <p>Dominio: ${domainName}</p>
-            `;
+        <h4 class="text-lg font-semibold">Whois Info</h4>
+        <p>Dominio: ${item.domainName}</p>
+      `;
     } else {
-      itemElement.textContent = JSON.stringify(item, null, 2);
+      itemElement.innerHTML = `
+        <pre>${JSON.stringify(item, null, 2)}</pre>
+      `;
     }
 
     return itemElement;
@@ -127,6 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayError() {
     const resultsContainer = document.getElementById("results");
     resultsContainer.innerHTML =
-      "<p>Ocurrió un error al buscar los resultados. Por favor, intenta nuevamente.</p>";
+      "<p class='text-red-400'>Ocurrió un error al buscar los resultados. Por favor, intenta nuevamente.</p>";
   }
 });
