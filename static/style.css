@@ -237,7 +237,7 @@ span {
 @keyframes words {
   0%,
   20% {
-    content: "Datos Financieros";
+    content: "Servidores de Aplicaciones";
   }
   21%,
   40% {
@@ -245,15 +245,15 @@ span {
   }
   41%,
   60% {
-    content: "Datos de Operaciones";
+    content: "Archivos";
   }
   61%,
   80% {
-    content: "Datos personales";
+    content: "Servidores Web";
   }
   81%,
   100% {
-    content: "Alertas y Notificaciones";
+    content: "Contactos";
   }
 }
 

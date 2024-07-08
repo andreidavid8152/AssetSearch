@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const description = document.createElement("p");
     description.classList.add("mb-3", "font-normal", "text-gray-400", "truncate");
-    description.textContent = `Valoración General: ${item.general_valuation}`;
+    description.innerHTML = `<strong style="color: #cbcba4;">Valoración:</strong> ${item.general_valuation}`;
     cardBody.appendChild(description);
 
     const labelsContainer = document.createElement("div");

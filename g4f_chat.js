@@ -28,11 +28,11 @@ const messages = [
             - Trazabilidad
 
             Utiliza la siguiente escala para la valoración general:
-            - Extremo: daño extremadamente grave
-            - Muy alto: daño muy grave
-            - Alto: daño grave
-            - Medio: daño importante
-            - Bajo: daño menor
+            - Extrema: daño extremadamente grave
+            - Muy alta: daño muy grave
+            - Alta: daño grave
+            - Media: daño importante
+            - Baja: daño menor
             - Despreciable: irrelevante a efectos prácticos
 
             Devuelve los resultados en el siguiente formato:
