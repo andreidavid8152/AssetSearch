@@ -49,79 +49,44 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    displayCategory(
-      "Categorías de Función",
-      data.function_categories,
-      resultsContainer
-    );
-    displayCategory(
-      "Categorías de Tipo de Datos",
-      data.data_type_categories,
-      resultsContainer
-    );
-    displayCategory(
-      "Categorías de Sensibilidad",
-      data.sensitivity_categories,
-      resultsContainer
-    );
+    data.forEach((item) => {
+      const itemElement = createItemElement(item);
+      itemElement.classList.add(
+        "p-4",
+        "bg-gray-800",
+        "rounded-lg",
+        "shadow-md",
+        "mb-4"
+      );
+      resultsContainer.appendChild(itemElement);
+    });
   }
 
-  function displayCategory(title, categoryData, container) {
-    if (Object.keys(categoryData).length > 0) {
-      const categoryTitle = document.createElement("h2");
-      categoryTitle.textContent = title;
-      categoryTitle.classList.add("text-2xl", "font-bold", "my-4");
-      container.appendChild(categoryTitle);
-
-      Object.entries(categoryData).forEach(([category, items]) => {
-        const categoryContainer = document.createElement("div");
-        categoryContainer.classList.add("category-container", "mb-6");
-
-        const categoryTitle = document.createElement("h3");
-        categoryTitle.textContent = category;
-        categoryTitle.classList.add("text-xl", "font-semibold", "mb-2");
-        categoryContainer.appendChild(categoryTitle);
-
-        items.forEach((item) => {
-          const itemElement = createItemElement(item, category);
-          itemElement.classList.add(
-            "p-4",
-            "bg-gray-800",
-            "rounded-lg",
-            "shadow-md",
-            "mb-4"
-          );
-          categoryContainer.appendChild(itemElement);
-        });
-
-        container.appendChild(categoryContainer);
-      });
-    }
-  }
-
-  function createItemElement(item, category) {
+  function createItemElement(item) {
     const itemElement = document.createElement("div");
+    itemElement.classList.add("p-4", "bg-gray-800", "rounded-lg", "shadow-md", "mb-4");
 
-    if (item.title && item.link) {
-      itemElement.innerHTML = `
-        <h4 class="text-lg font-semibold">${item.title}</h4>
-        <a href="${item.link}" target="_blank" class="text-blue-400">${item.link}</a>
-      `;
-    } else if (item.dns_info) {
-      itemElement.innerHTML = `
-        <h4 class="text-lg font-semibold">DNS Info</h4>
-        <p>${item.dns_info.join(", ")}</p>
-      `;
-    } else if (item.domainName) {
-      itemElement.innerHTML = `
-        <h4 class="text-lg font-semibold">Whois Info</h4>
-        <p>Dominio: ${item.domainName}</p>
-      `;
-    } else {
-      itemElement.innerHTML = `
-        <pre>${JSON.stringify(item, null, 2)}</pre>
-      `;
-    }
+    const linkElement = document.createElement("a");
+    linkElement.href = item.data;
+    linkElement.target = "_blank";
+    linkElement.classList.add("text-blue-400", "text-lg", "font-semibold", "block", "mb-2");
+    linkElement.textContent = item.data;
+    itemElement.appendChild(linkElement);
+
+    const functionCategoryElement = document.createElement("span");
+    functionCategoryElement.classList.add("bg-indigo-600", "text-white", "px-2", "py-1", "rounded", "mr-2");
+    functionCategoryElement.textContent = item.function_category;
+    itemElement.appendChild(functionCategoryElement);
+
+    const dataTypeCategoryElement = document.createElement("span");
+    dataTypeCategoryElement.classList.add("bg-green-600", "text-white", "px-2", "py-1", "rounded", "mr-2");
+    dataTypeCategoryElement.textContent = item.data_type_category;
+    itemElement.appendChild(dataTypeCategoryElement);
+
+    const valuationElement = document.createElement("div");
+    valuationElement.classList.add("mt-2", "text-yellow-400", "font-semibold");
+    valuationElement.textContent = `Valoración General: ${item.general_valuation}`;
+    itemElement.appendChild(valuationElement);
 
     return itemElement;
   }
