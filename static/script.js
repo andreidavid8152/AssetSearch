@@ -1,15 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const domain = params.get("domain");
-  if (domain) {
-    fetchResults(domain)
-      .then(displayResults)
-      .catch((error) => {
-        console.error("Error displaying results:", error);
-        displayError();
-      });
-  }
 
+  const searchButton = document.getElementById("searchButton");
+  const domainInput = document.getElementById("domainInput");
+  const searchedDomainElement = document.getElementById("searchedDomain");
+
+  if (searchButton) {
+    searchButton.addEventListener("click", () => {
+      const domain = domainInput.value;
+      if (domain) {
+        window.location.href = `results.html?domain=${domain}`;
+      } else {
+        alert("Por favor, ingresa un dominio.");
+      }
+    });
+  } else {
+    const params = new URLSearchParams(window.location.search);
+    const domain = params.get("domain");
+    if (domain) {
+      if (searchedDomainElement) {
+        searchedDomainElement.textContent = domain;
+      }
+      fetchResults(domain)
+        .then(displayResults)
+        .catch((error) => {
+          console.error("Error displaying results:", error);
+          displayError();
+        });
+    }
+  }
   async function fetchResults(domain) {
     try {
       const response = await fetch(`http://localhost:9000/search?domain=${domain}`);
