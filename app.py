@@ -123,4 +123,4 @@ def search():
     return jsonify(classified_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=9000)

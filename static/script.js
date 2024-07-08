@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchResults(domain) {
     try {
       const response = await fetch(
-        `http://localhost:5000/search?domain=${domain}`
+        `http://localhost:9000/search?domain=${domain}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
