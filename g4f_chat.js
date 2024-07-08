@@ -8,9 +8,9 @@ const messages = [
         content: `Clasifica las siguientes URLs:\n\n<PLACEHOLDER_JSON_DATA>\n\n
             Por favor, clasifica las URLs según su función y tipo de datos. 
             Las categorías de función pueden incluir: 
-            - Servidor de Bases de Datos
-            - Servidor de Aplicaciones
-            - Servidor de Correo
+            - Servidor Bases de Datos
+            - Servidor Aplicaciones
+            - Servidor Correo
             - Servidor Web
             - Contactos
             - Archivos

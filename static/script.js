@@ -153,14 +153,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getImageForCategory(category) {
     const images = {
-      "Servidor de Bases de Datos": "https://i.ibb.co/gJZfnCW/fsdfsfsfs-4.png",
-      "Servidor de Aplicaciones": "https://i.ibb.co/Kxz1PbF/fsdfsfsfs-1.png",
-      "Servidor de Correo": "https://i.ibb.co/xHsYLVT/fsdfsfsfs-2.png",
+      "Servidor Bases de Datos": "https://i.ibb.co/gJZfnCW/fsdfsfsfs-4.png",
+      "Servidor Aplicaciones": "https://i.ibb.co/Kxz1PbF/fsdfsfsfs-1.png",
+      "Servidor Correo": "https://i.ibb.co/xHsYLVT/fsdfsfsfs-2.png",
       "Servidor Web": "https://i.ibb.co/3c5xhQZ/fsdfsfsfs-3.png",
       "Contactos": "https://i.ibb.co/gPXmBGH/Dise-o-sin-t-tulo-1.png",
-      "Archivos": "https://i.ibb.co/6wnq7Cc/Dise-o-sin-t-tulo.png",
+      "Archivos": "https://i.ibb.co/6wnq7Cc/Dise-o-sin-t-tulo.png"
     };
-    return images[category] || "https://via.placeholder.com/150/000000/FFFFFF?text=DEFAULT";
+    return images[category];
   }
 
   function displayError() {

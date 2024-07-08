@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 import subprocess
 import requests
+import dns.resolver
+
 from flask_cors import CORS
 from gpt import clasificar_urls 
 
@@ -8,6 +10,7 @@ app = Flask(__name__)
 CORS(app)  # Habilitar CORS
 
 # Claves de API
+whois_api_key = 'at_uF7JEqGboHW8XMG9LEkbGjCTbbz4X'
 google_api_key = 'AIzaSyBSt4-7B41fv_rMg60AJXZgV1gthw5DsBc'
 google_cx = '2081fc0796d0f4ad2'
 
@@ -82,6 +85,21 @@ def search():
     except Exception as e:
         domain_data.append({"error": str(e)})
 
+    # Whois Lookup
+    try:
+        whois_url = f"https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey={whois_api_key}&domainName={domain}&outputFormat=JSON"
+        whois_response = requests.get(whois_url)
+        whois_info = whois_response.json()
+    except Exception as e:
+        whois_info = {"error": str(e)}
+    
+    # DNS Enumeration
+    try:
+        dns_info = dns.resolver.resolve(domain, 'A')
+        dns_data = [str(rdata) for rdata in dns_info]
+    except Exception as e:
+        dns_info = {"error": str(e)}
+
     # Google search
     try:
         # General
@@ -106,16 +124,9 @@ def search():
     # Remove duplicates
     domain_data = remove_duplicates(domain_data)
 
-    # Clasificar URLs en bloques de 10
-    classified_data = []
-    for i in range(0, len(domain_data[:10]), 10):
-        chunk = domain_data[i:i+10]
-        classified_chunk = clasificar_urls(chunk)
-        if "error" in classified_chunk:
-            classified_data.append({"error": classified_chunk["error"]})
-        else:
-            classified_data.extend(classified_chunk)
-        print(classified_data)
+    # Clasificar únicamente los primeros 15 datos
+    domain_data = domain_data[:15]
+    classified_data = clasificar_urls(domain_data)
 
     return jsonify(classified_data)
 
