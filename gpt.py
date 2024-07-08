@@ -31,34 +31,3 @@ def clasificar_urls(json_input):
         print(f"Error decoding JSON: {e}")
         return []
 
-# Función para dividir la lista en lotes de tamaño n
-def dividir_en_lotes(data, n):
-    for i in range(0, len(data), n):
-        yield data[i:i + n]
-
-# Ejemplo de uso de la función
-data = [
-    {"data": "https://bannerloginnnoprod.udla.edu.ec"},
-    {"data": "https://bannerregistronoprod.udla.edu.ec"},
-    {"data": "https://bannerwfnoprod.udla.edu.ec"},
-    {"data": "https://bannerautoservicionoprod.udla.edu.ec"},
-    {"data": "https://udla.edu.ec"},
-    {"data": "https://blogs.udla.edu.ec"}
-]
-
-# Dividir los datos en lotes de 3 elementos
-lotes = dividir_en_lotes(data, 3)
-
-# Almacenar todos los resultados
-todos_los_resultados = []
-
-# Procesar cada lote
-for lote in lotes:
-    resultado = clasificar_urls(lote)
-    todos_los_resultados.extend(resultado)
-
-# Convertir todos los resultados a JSON sin escape de caracteres Unicode
-result_json = json.dumps(todos_los_resultados, indent=4, ensure_ascii=False)
-
-# Imprimir el JSON resultante
-print(result_json)

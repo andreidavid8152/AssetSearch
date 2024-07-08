@@ -6,28 +6,28 @@ const messages = [
     {
         role: "user",
         content: `Clasifica las siguientes URLs:\n\n<PLACEHOLDER_JSON_DATA>\n\n
-Por favor, clasifica las URLs según su función y tipo de datos. 
-Las categorías de función pueden incluir: 
-- Servidores de Bases de Datos
-- Servidores de Aplicaciones
-- Servidores de Correo
-- Páginas Web
-- Contactos
-- Archivos
-- Otros
+            Por favor, clasifica las URLs según su función y tipo de datos. 
+            Las categorías de función pueden incluir: 
+            - Servidores de Bases de Datos
+            - Servidores de Aplicaciones
+            - Servidores de Correo
+            - Páginas Web
+            - Contactos
+            - Archivos
+            - Otros
 
-Las categorías de tipo de datos pueden incluir: 
-- Datos Sensibles
-- Datos Confidenciales
-- Datos Públicos
+            Las categorías de tipo de datos pueden incluir: 
+            - Datos Sensibles
+            - Datos Confidenciales
+            - Datos Públicos
 
-Devuelve los resultados en el siguiente formato:
-{
-    "data": "<URL>",
-    "function_category": "<Categoría de Función>",
-    "data_type_category": "<Categoría de Tipo de Datos>"
-},
-`,
+            Devuelve los resultados en el siguiente formato:
+            {
+                "data": "<URL>",
+                "function_category": "<Categoría de Función>",
+                "data_type_category": "<Categoría de Tipo de Datos>"
+            },
+        `,
     },
 ];
 

@@ -5,7 +5,7 @@ const messages = [
     { role: "system", content: "You are an AI assistant." },
     {
         role: "user",
-        content: `Clasifica las siguientes URLs:\n\n[{"data": "https://bannerautoservicionoprod.udla.edu.ec"}, {"data": "https://udla.edu.ec"}, {"data": "https://blogs.udla.edu.ec"}]\n\n
+        content: `Clasifica las siguientes URLs:\n\n[{"data": "https://www.udla.edu.ec/app/pardot/wp-content/uploads/2022/05/Quebec-declaration.pdf"}, {"data": "https://www.udla.edu.ec/app/pardot/wp-content/uploads/2022/05/Ingles-Decalogue-of-the-CONSCIOUS-TRAVELER-ENG.pdf"}]\n\n
 Por favor, clasifica las URLs según su función y tipo de datos. 
 Las categorías de función pueden incluir: 
 - Servidores de Bases de Datos

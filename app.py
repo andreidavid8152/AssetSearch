@@ -118,6 +118,7 @@ def search():
             classified_data.append({"error": classified_chunk["error"]})
         else:
             classified_data.extend(classified_chunk)
+        print(classified_data)
 
     return jsonify(classified_data)
 
