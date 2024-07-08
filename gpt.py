@@ -27,6 +27,7 @@ def clasificar_urls(json_input):
         try:
             # Envolver la salida en una lista JSON válida
             output_json = f"[{output}]"
+            print(output_json)
             return json.loads(output_json)
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")

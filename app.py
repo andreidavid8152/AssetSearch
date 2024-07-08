@@ -124,9 +124,19 @@ def search():
     # Remove duplicates
     domain_data = remove_duplicates(domain_data)
 
-    # Clasificar únicamente los primeros 15 datos
-    domain_data = domain_data[:15]
-    classified_data = clasificar_urls(domain_data)
+    # Clasificar URLs en bloques de 10
+    classified_data = []
+    for i in range(0, len(domain_data[:10]), 5):
+        chunk = domain_data[i:i+5]
+        classified_chunk = clasificar_urls(chunk)
+        if "error" in classified_chunk:
+            classified_data.append({"error": classified_chunk["error"]})
+        else:
+            classified_data.extend(classified_chunk)
+
+    # # Clasificar únicamente los primeros 15 datos
+    # domain_data = domain_data[:5]
+    # classified_data = clasificar_urls(domain_data)
 
     return jsonify(classified_data)
 

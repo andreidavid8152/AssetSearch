@@ -2,7 +2,7 @@ const { G4F } = require("g4f");
 const g4f = new G4F();
 
 const messages = [
-    { role: "system", content: "You are an AI assistant." },
+    { role: "system", content: "You're an expert in JSON." },
     {
         role: "user",
         content: `Clasifica las siguientes URLs:\n\n<PLACEHOLDER_JSON_DATA>\n\n
@@ -35,17 +35,31 @@ const messages = [
             - Baja: daño menor
             - Despreciable: irrelevante a efectos prácticos
 
-            Devuelve los resultados en el siguiente formato:
+            Devuelve los resultados estrictamente en el siguiente formato:
+            
             {
                 "data": "<URL>",
                 "function_category": "<Categoría de Función>",
                 "data_type_category": "<Categoría de Tipo de Datos>",
                 "general_valuation": "<Valoración General>"
             },
+
+            Nota: No incluyas nada a menos del JSON.
         `,
     },
 ];
 
-g4f.chatCompletion(messages).then((response) => {
-    console.log(response);
-});
+const options = {
+    provider: g4f.providers.GPT,
+    model: "gpt-4",
+    debug: false,
+};
+
+(async () => {
+    try {
+        const text = await g4f.chatCompletion(messages, options);
+        console.log(text);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+})();
