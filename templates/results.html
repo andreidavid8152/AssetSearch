@@ -51,6 +51,22 @@
           transform: rotate(360deg);
         }
       }
+
+      /* Estilos para la animación del texto */
+      .fade-in-up {
+        animation: fadeInUp 1s ease-in-out;
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
   </head>
   <body class="bg-black text-gray-100">
@@ -71,9 +87,10 @@
     <!-- Loading Spinner -->
     <div
       id="loading"
-      class="hidden flex justify-center items-center fixed inset-0 bg-gray-800 bg-opacity-75 z-50"
+      class="hidden flex flex-col justify-center items-center fixed inset-0 bg-gray-800 bg-opacity-75 z-50"
     >
-      <div class="loader"></div>
+      <div class="loader mb-4"></div>
+      <p id="loadingText" class="text-white text-xl"></p>
     </div>
 
     <script src="../static/script.js" defer></script>

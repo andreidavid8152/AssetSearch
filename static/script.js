@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const searchButton = document.getElementById("searchButton");
   const domainInput = document.getElementById("domainInput");
   const searchedDomainElement = document.getElementById("searchedDomain");
   const loadingElement = document.getElementById("loading");
+  const loadingTextElement = document.getElementById("loadingText");
+
+  const loadingMessages = ["Cargando activos...", "Analizando datos...", "Preparando resultados..."];
+  let loadingMessageIndex = 0;
 
   if (searchButton) {
     searchButton.addEventListener("click", () => {
@@ -168,9 +171,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showLoading() {
     loadingElement.classList.remove("hidden");
+    updateLoadingText();
   }
 
   function hideLoading() {
     loadingElement.classList.add("hidden");
+  }
+
+  function updateLoadingText() {
+    loadingTextElement.classList.remove("fade-in-up");
+    void loadingTextElement.offsetWidth; // Trigger reflow to restart animation
+    loadingTextElement.classList.add("fade-in-up");
+    loadingTextElement.textContent = loadingMessages[loadingMessageIndex];
+    loadingMessageIndex = (loadingMessageIndex + 1) % loadingMessages.length;
+    setTimeout(updateLoadingText, 5000); // Cambiar mensaje cada 5 segundos
   }
 });
