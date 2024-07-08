@@ -4,9 +4,12 @@ import whois as whois_lib
 import dns.resolver
 import shodan
 import requests
+from flask_cors import CORS
+
 from categorization import categorize_by_function, categorize_by_data_type, categorize_by_sensitivity
 
 app = Flask(__name__)
+CORS(app)  # Habilitar CORS para toda la aplicación
 
 # Configura tus propias claves de API aquí
 whois_api_key = 'at_uF7JEqGboHW8XMG9LEkbGjCTbbz4X'
