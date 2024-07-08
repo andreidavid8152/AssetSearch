@@ -21,11 +21,27 @@ const messages = [
             - Datos Confidenciales
             - Datos Públicos
 
+            Además, realiza una valoración general del activo basado en las siguientes categorías:
+            - Disponibilidad
+            - Integridad
+            - Confidencialidad
+            - Autenticidad
+            - Trazabilidad
+
+            Utiliza la siguiente escala para la valoración general:
+            - Extremo: daño extremadamente grave
+            - Muy alto: daño muy grave
+            - Alto: daño grave
+            - Medio: daño importante
+            - Bajo: daño menor
+            - Despreciable: irrelevante a efectos prácticos
+
             Devuelve los resultados en el siguiente formato:
             {
                 "data": "<URL>",
                 "function_category": "<Categoría de Función>",
-                "data_type_category": "<Categoría de Tipo de Datos>"
+                "data_type_category": "<Categoría de Tipo de Datos>",
+                "general_valuation": "<Valoración General>"
             },
         `,
     },
