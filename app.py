@@ -111,7 +111,7 @@ def search():
 
     # Clasificar URLs en bloques de 10
     classified_data = []
-    for i in range(0, len(domain_data[:10]), 10):
+    for i in range(0, len(domain_data), 10):
         chunk = domain_data[i:i+10]
         classified_chunk = clasificar_urls(chunk)
         if "error" in classified_chunk:
