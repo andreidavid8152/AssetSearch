@@ -2,17 +2,17 @@ from flask import Flask, request, jsonify
 import subprocess
 import requests
 from flask_cors import CORS
-from gpt import clasificar_urls  # Importar la función desde gpt.py
+from gpt import clasificar_urls 
 
 app = Flask(__name__)
-CORS(app)  # Habilitar CORS para toda la aplicación
+CORS(app)  # Habilitar CORS
 
-# Configura tus propias claves de API aquí
+# Claves de API
 google_api_key = 'AIzaSyBSt4-7B41fv_rMg60AJXZgV1gthw5DsBc'
 google_cx = '2081fc0796d0f4ad2'
 
 def get_subdomains(domain):
-    assetfinder_path = r"C:\Users\andre\go\bin\assetfinder.exe"  # Asegúrate de que esta ruta es correcta
+    assetfinder_path = r"C:\Users\andre\go\bin\assetfinder.exe"
     command = f"{assetfinder_path} --subs-only {domain}"
     try:
         result = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
@@ -36,7 +36,6 @@ def extract_relevant_data(results):
     for item in results.get('items', []):
         pagemap = item.get('pagemap', {})
 
-        # Extract emails, telephones, faxnumbers from pagemap
         if 'email' in pagemap:
             relevant_data.append({"data": pagemap['email']})
         if 'telephone' in pagemap:
@@ -44,7 +43,6 @@ def extract_relevant_data(results):
         if 'faxnumber' in pagemap:
             relevant_data.append({"data": pagemap['faxnumber']})
 
-        # Extract emails and telephones from educationalorganization
         if 'educationalorganization' in pagemap:
             for org in pagemap['educationalorganization']:
                 if 'email' in org:
@@ -54,7 +52,6 @@ def extract_relevant_data(results):
                 if 'faxnumber' in org:
                     relevant_data.append({"data": org['faxnumber']})
 
-        # Append link separately
         relevant_data.append({"data": item.get('link')})
 
     return relevant_data
@@ -74,7 +71,7 @@ def search():
     domain = request.args.get('domain')
     domain_data = []
 
-    # Subdomain Enumeration using assetfinder
+    # Assetfinder
     try:
         subdomains = get_subdomains(domain)
         if subdomains:
@@ -85,21 +82,21 @@ def search():
     except Exception as e:
         domain_data.append({"error": str(e)})
 
-    # Google Dorking (Custom Search API)
+    # Google search
     try:
-        # General search for the domain
+        # General
         general_info = perform_google_search(f'site:{domain}')
         domain_data.extend(extract_relevant_data(general_info))
 
-        # Search for subdomains
+        # Subdominios
         subdomains_info = perform_google_search(f'site:*.{domain}')
         domain_data.extend(extract_relevant_data(subdomains_info))
 
-        # Search for emails
+        # Emails
         emails_info = perform_google_search(f'site:{domain} intext:"@{domain}"')
         domain_data.extend(extract_relevant_data(emails_info))
 
-        # Search for apps
+        # Apps
         apps_info = perform_google_search(f'site:{domain} inurl:"/app"')
         domain_data.extend(extract_relevant_data(apps_info))
 

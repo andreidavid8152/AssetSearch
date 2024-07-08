@@ -24,7 +24,6 @@ def clasificar_urls(json_input):
         # Procesar la salida de Node.js
         output = result.stdout.strip()
 
-        # Intentar decodificar la salida de Node.js
         try:
             # Envolver la salida en una lista JSON válida
             output_json = f"[{output}]"

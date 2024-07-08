@@ -180,10 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateLoadingText() {
     loadingTextElement.classList.remove("fade-in-up");
-    void loadingTextElement.offsetWidth; // Trigger reflow to restart animation
+    void loadingTextElement.offsetWidth; 
     loadingTextElement.classList.add("fade-in-up");
     loadingTextElement.textContent = loadingMessages[loadingMessageIndex];
     loadingMessageIndex = (loadingMessageIndex + 1) % loadingMessages.length;
-    setTimeout(updateLoadingText, 5000); // Cambiar mensaje cada 5 segundos
+    setTimeout(updateLoadingText, 5000);
   }
 });
