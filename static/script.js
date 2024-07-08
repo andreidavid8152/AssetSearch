@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchButton = document.getElementById("searchButton");
   const domainInput = document.getElementById("domainInput");
   const searchedDomainElement = document.getElementById("searchedDomain");
+  const loadingElement = document.getElementById("loading");
 
   if (searchButton) {
     searchButton.addEventListener("click", () => {
@@ -20,14 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (searchedDomainElement) {
         searchedDomainElement.textContent = domain;
       }
+      showLoading();
       fetchResults(domain)
         .then(displayResults)
         .catch((error) => {
           console.error("Error displaying results:", error);
           displayError();
-        });
+        })
+        .finally(hideLoading);
     }
   }
+
   async function fetchResults(domain) {
     try {
       const response = await fetch(`http://localhost:9000/search?domain=${domain}`);
@@ -144,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return card;
   }
 
-
   function getImageForCategory(category) {
     const images = {
       "Servidor de Bases de Datos": "https://i.ibb.co/gJZfnCW/fsdfsfsfs-4.png",
@@ -161,5 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultsContainer = document.getElementById("results");
     resultsContainer.innerHTML =
       "<p class='text-red-400 text-center bg-gray-700 p-4 rounded'>Ocurrió un error al buscar los resultados. Por favor, intenta nuevamente.</p>";
+  }
+
+  function showLoading() {
+    loadingElement.classList.remove("hidden");
+  }
+
+  function hideLoading() {
+    loadingElement.classList.add("hidden");
   }
 });
