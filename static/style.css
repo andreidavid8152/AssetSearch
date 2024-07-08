@@ -123,9 +123,7 @@ span {
 }
 
 .home-img img:hover {
-  box-shadow: 
-    0 0 25px var(--main-color),
-    0 0 50px var(--main-color),
+  box-shadow: 0 0 25px var(--main-color), 0 0 50px var(--main-color),
     0 0 100px var(--main-color);
 }
 
@@ -208,7 +206,7 @@ span {
 }
 
 .text-animation span::before {
-  content: 'Datos Financieros';
+  content: "Datos Financieros";
   color: var(--main-color);
   animation: words 20s infinite;
 }
@@ -228,34 +226,34 @@ span {
   0%,
   50%,
   100% {
-      border-left-color: var(--bg-color);
+    border-left-color: var(--bg-color);
   }
   25%,
   75% {
-      border-left-color: var(--main-color);
+    border-left-color: var(--main-color);
   }
 }
 
 @keyframes words {
   0%,
   20% {
-      content: 'Datos Financieros';
+    content: "Datos Financieros";
   }
   21%,
   40% {
-      content: "Datos de Inventario";
+    content: "Datos de Inventario";
   }
   41%,
   60% {
-      content: "Datos de Operaciones";
+    content: "Datos de Operaciones";
   }
   61%,
   80% {
-      content: "Datos personales";
+    content: "Datos personales";
   }
   81%,
   100% {
-      content: "Alertas y Notificaciones";
+    content: "Alertas y Notificaciones";
   }
 }
 
@@ -265,7 +263,7 @@ span {
   50%,
   75%,
   100% {
-      width: 0;
+    width: 0;
   }
   5%,
   20%,
@@ -275,57 +273,48 @@ span {
   70%,
   80%,
   95% {
-      width: calc(100% + 8px);
+    width: calc(100% + 8px);
   }
 }
 
-
 /*Serach Box*/
-.box{
+.box {
+  width: 500px;
 
-	width: 500px;
+  height: 50px;
 
-	height: 50px;
+  background-color: white;
 
-	background-color: white;
+  border-radius: 30px;
 
-	border-radius: 30px;
+  display: flex;
 
-	display: flex;
+  align-items: center;
 
-	align-items: center;
-
-	padding: 20px;
-
+  padding: 20px;
 }
 
 .box > i {
+  font-size: 20px;
 
-	font-size: 20px;
-
-	color: #777;
-
+  color: #777;
 }
 
-.box > input{
+.box > input {
+  flex: 1;
 
-	flex: 1;
+  height: 40px;
 
-	height: 40px;
+  border: none;
 
-	border: none;
+  outline: none;
 
-	outline: none;
+  font-size: 18px;
 
-	font-size: 18px;
-
-	padding-left: 10px;
-
-
+  padding-left: 10px;
 }
 
-
-.box{
+.box {
   width: 500px;
   height: 50px;
   background-color: var(--text-color);
@@ -335,7 +324,7 @@ span {
   padding: 20px;
 }
 
-.box > input{
+.box > input {
   background-color: var(--text-color);
   flex: 1;
   height: 40px;
@@ -343,9 +332,7 @@ span {
   outline: none;
   font-size: 18px;
   padding-left: 10px;
-
 }
-
 
 .button-container {
   display: flex;
@@ -363,11 +350,38 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button > a{
-  color:  white;
+button > a {
+  color: white;
 }
 
 button:hover {
   background-color: darkred;
 }
 
+#results a {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+#results img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+#results .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#results .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
